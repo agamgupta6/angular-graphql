@@ -1,0 +1,53 @@
+<form [formGroup]="checkinForm" novalidate (ngSubmit)="doCheckIn()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <label for="bookingCode" *ngIf="checkinForm.controls['bookingCode'].valid || checkinForm.controls['bookingCode'].pristine">Booking Code*</label>
+          
+          <mat-error *ngIf="checkinForm.controls['bookingCode'].hasError('required') && checkinForm.controls['bookingCode'].dirty">
+            Booking code is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="checkinForm.controls['bookingCode'].hasError('pattern')">
+            Invalid characters
+          </mat-error>
+          <mat-error *ngIf="checkinForm.controls['bookingCode'].hasError('minlength') || checkinForm.controls['bookingCode'].hasError('maxlength')">
+            Booking code must be 6 characters
+          </mat-error>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Booking Code" formControlName="bookingCode" name="bookingCode">
+            <mat-icon matSuffix aria-hidden="true">person</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="familyName" *ngIf="checkinForm.controls['familyName'].valid || checkinForm.controls['familyName'].pristine">Family Name*</label>
+          <mat-error *ngIf="checkinForm.controls['familyName'].hasError('required')&& checkinForm.controls['familyName'].dirty">
+            Family name is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="checkinForm.controls['familyName'].hasError('pattern')">
+            Invalid characters
+          </mat-error>
+          <mat-error *ngIf=" checkinForm.controls['familyName'].hasError('maxlength')">
+            Family name can not exceed 15 characters
+          </mat-error>
+          <mat-form-field class="full-width">
+            
+            <input matInput placeholder="Family name" formControlName="familyName" name="familyName">
+            <mat-icon matSuffix aria-hidden="true">flight_takeoff</mat-icon>
+           
+          </mat-form-field>
+        </div>
+        
+      </div>
+      
+     
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!checkinForm.valid">Check In</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
